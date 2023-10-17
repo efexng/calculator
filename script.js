@@ -126,3 +126,38 @@ deleteButtons.addEventListener('click', button => {
     calculator.delete()
     calculator.updateDisplay()
 })
+
+
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+
+    // Check if the key is a number key (1-9 or 0)
+    if (/^[0-9]$/.test(key)) {
+        calculator.appendNumber(key);
+        calculator.updateDisplay();
+    }
+
+    // Check if the key is an operator (+, -, *, /)
+    else if (key === '+' || key === '-' || key === '*' || key === '/') {
+        calculator.chooseOp(key);
+        calculator.updateDisplay();
+    }
+
+    // Check if the key is the equals sign (=)
+    else if (key === '=' || key === 'Enter') {
+        calculator.compute();
+        calculator.updateDisplay();
+    }
+
+    // Check if the key is the delete key (Backspace)
+    else if (key === 'Backspace') {
+        calculator.delete();
+        calculator.updateDisplay();
+    }
+
+    // Check if the key is the clear key (Escape)
+    else if (key === 'Escape') {
+        calculator.clear();
+        calculator.updateDisplay();
+    }
+});
