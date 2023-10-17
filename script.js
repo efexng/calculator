@@ -20,16 +20,23 @@
         this.curOpand = this.curOpand.toString() + number.toString()
     }
 
-    chooseOp(operations) {
-        if (this.curOpand === '') return
-        if (this.prevOpand !== '') {
-            this.compute()
+    chooseOp(operation) {
+        if (this.curOpand === '' && this.prevOpand !== '') {
+            // If the current operand is empty and there's a previous operand,
+            // update the current operation without changing the previous operand.
+            this.operations = operation;
+            this.updateDisplay();
+        } else if (this.curOpand !== '') {
+            // If there's a current operand, perform the previous operation,
+            // and then update the current operation and clear the current operand.
+            this.compute();
+            this.operations = operation;
+            this.prevOpand = this.curOpand;
+            this.curOpand = '';
+            this.updateDisplay();
         }
-        this.operations = operations
-        this.prevOpand = this.curOpand
-        this.curOpand = ''
     }
-
+    
     compute() {
         let computation
         const prev = parseFloat(this.prevOpand)
@@ -107,10 +114,10 @@ numberButtons.forEach(button => {
 
 operationsButtons.forEach(button => {
     button.addEventListener('click', () => {
-        calculator.chooseOp(button.innerText)
-        calculator.updateDisplay()
-    })
+        calculator.chooseOp(button.innerText);
+    });
 })
+
 
 equalsButtons.addEventListener('click', button => {
     calculator.compute()
