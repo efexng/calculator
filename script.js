@@ -138,7 +138,7 @@ document.addEventListener('keydown', function(event) {
     }
 
     // Check if the key is an operator (+, -, *, /)
-    else if (key === '+' || key === '-' || key === '*' || key === '/') {
+    else if (key === '+' || key === '-' || key === '*' || key === '÷') {
         calculator.chooseOp(key);
         calculator.updateDisplay();
     }
