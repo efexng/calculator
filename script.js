@@ -127,9 +127,13 @@ deleteButtons.addEventListener('click', button => {
     calculator.updateDisplay()
 })
 
-
 document.addEventListener('keydown', function(event) {
-    const key = event.key;
+    let key = event.key;
+
+    // Check if the key is the division symbol (/) and convert it to '÷'
+    if (key === '/') {
+        key = '÷';
+    }
 
     // Check if the key is a number key (1-9 or 0)
     if (/^[0-9]$/.test(key)) {
@@ -137,7 +141,7 @@ document.addEventListener('keydown', function(event) {
         calculator.updateDisplay();
     }
 
-    // Check if the key is an operator (+, -, *, /)
+    // Check if the key is an operator (+, -, *, /, or ÷)
     else if (key === '+' || key === '-' || key === '*' || key === '÷') {
         calculator.chooseOp(key);
         calculator.updateDisplay();
